@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './Journal.css';
 
 export default function Journal() {
     const [entries, setEntries] = useState(() => {
@@ -22,7 +23,7 @@ export default function Journal() {
             title: title ? title.trim() : "Untitled Entry",
             content: content,
             date: new Date().toLocaleDateString(),
-        }
+        };
 
         setEntries([...entries, newEntry]);
         setTitle('');
@@ -34,32 +35,40 @@ export default function Journal() {
     }
 
     return (
-        <div>
-            <h1>My Journal</h1>
-            <form onSubmit={handleSaveEntry}>
+        <div className="journal-container">
+            <header className="journal-header">
+                <h1>My Journal</h1>
+                <span className="bear-face">ʕ •ᴥ• ʔ</span>
+            </header>
+            <form className="journal-form" onSubmit={handleSaveEntry}>
                 <input
+                    className="journal-input"
                     type="text"
                     placeholder="Entry #52"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
                 <textarea
+                    className="journal-textarea"
                     placeholder="Today I saw..."
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                 />
-                <button type="submit">Save Entry</button>
+                <button className="journal-submit-btn" type="submit">Save Entry</button>
             </form>
 
-            <div>
+            <div className="entriesFeed">
                 {entries.length === 0 ? (
-                    <p>No entries yet</p>
+                    <p className="empty-state">No entries yet</p>
                 ) : (
                     entries.map((entry) => (
-                        <article key={entry.id}>
-                            <h>{entry.title} {entry.date}</h>
-                            <p>{entry.content}</p>
-                            <button onClick={() => handleDeleteEntry(entry.id)}>Delete</button>
+                        <article className="entry-card" key={entry.id}>
+                            <div className="entry-card-header">
+                                <h3 className="entry-card-title">{entry.title}</h3>
+                                <span className="entry-date">{entry.date}</span>
+                            </div>
+                            <p className="entry-content">{entry.content}</p>
+                            <button className="entry-delete-btn" onClick={() => handleDeleteEntry(entry.id)}>Delete</button>
                         </article>
                     ))
                 )

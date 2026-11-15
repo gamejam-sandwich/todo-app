@@ -1,0 +1,1 @@
+// TODO: a feature that lets users upload images and use them as stickers on their journal cover?
