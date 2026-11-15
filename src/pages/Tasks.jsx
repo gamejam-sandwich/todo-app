@@ -1,8 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Tasks() {
-    const [tasks, setTasks] = useState([]);
+    // load initial tasks from localStorage upon mount
+    const [tasks, setTasks] = useState(() => {
+        const savedTasks = localStorage.getItem('my_tasks');
+        return savedTasks ? JSON.parse(savedTasks) : [];
+    });
+
     const [inputText, setInputText] = useState('');
+
+    // save to localStorage each time 'tasks' is updated
+    useEffect(() => {
+        localStorage.setItem('my_tasks', JSON.stringify(tasks));
+    }, [tasks]);
 
     function handleAddTask(e) {
         e.preventDefault();  // prevent page from refreshing on submission
