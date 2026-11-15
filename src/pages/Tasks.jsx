@@ -37,6 +37,7 @@ export default function Tasks() {
     }
 
     function handleDeleteTask(id) {
+        // only show the tasks that DON'T match the targetted id to be deleted
         setTasks(tasks.filter((task) => task.id !== id));
     }
 
