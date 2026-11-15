@@ -1,11 +1,9 @@
 import { Routes, Route, Link } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Tasks from './pages/Tasks';
 
 function Home() {
     return <h1>Journal cover</h1>;
-}
-
-function TodoList() {
-    return <h1>To-Do List?</h1>;
 }
 
 function Journal() {
@@ -15,15 +13,11 @@ function Journal() {
 export default function App() {
     return (
         <div>
-            <nav style={{display: 'flex', gap: '1rem', marginBottom: '1rem'}}>
-                <Link to="/">Home</Link>
-                <Link to="/todos">Tasks</Link>
-                <Link to="/journals">Journal</Link>
-            </nav>
-
+            <Navbar />
+            
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/todos" element={<TodoList />} />
+                <Route path="/todos" element={<Tasks />} />
                 <Route path="/journals" element={<Journal />} />
             </Routes>
         </div>
