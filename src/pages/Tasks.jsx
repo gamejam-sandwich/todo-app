@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import './Tasks.css'
 export default function Tasks() {
     // load initial tasks from localStorage upon mount
     const [tasks, setTasks] = useState(() => {
@@ -42,22 +42,27 @@ export default function Tasks() {
     }
 
     return (
-        <div>
-            <h1>My Tasks</h1>
-            <form onSubmit={handleAddTask} style={{marginBottom: '1rem'}}>
+        <div className="tasks-container">
+            <header className="tasks-header">
+                <h1>My Tasks</h1>
+                <span className="bear-face">ʕ •ᴥ• ʔ</span>
+            </header>
+            <form className="tasks-form" onSubmit={handleAddTask} style={{marginBottom: '1rem'}}>
                 <input
+                    className="tasks-input"
                     type="text"
                     placeholder="Your next task is..."
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                 />
-                <button type="submit">Add Task</button>
+                <button className="tasks-add-btn" type="submit">Add Task</button>
             </form>
 
-            <ul>
+            <ul className="tasks-list">
                 {tasks.map((task) => (
-                    <li key={task.id} style={{marginBottom: '0.5rem'}}>
+                    <li className="task-item" key={task.id} style={{marginBottom: '0.5rem'}}>
                         <span
+                            className={task.completed ? 'task-text completed':'task-text'}
                             onClick={() => handleToggleTask(task.id)}
                             style={{
                                 textDecoration: task.completed ? 'line-through' : 'none',
@@ -67,7 +72,7 @@ export default function Tasks() {
                         >
                             {task.text}
                         </span>
-                        <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+                        <button className="task=delete-btn" onClick={() => handleDeleteTask(task.id)}>Delete</button>
                     </li>
                 ))}
             </ul>
